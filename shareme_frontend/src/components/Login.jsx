@@ -7,7 +7,18 @@ import logo from "../assets/logowhite.png";
 import { render } from "react-dom";
 
 const Login = () => {
-  const responseGoogle = (response) => {};
+  const responseGoogle = (response) => {
+    localStorage.setItem("user", JSON.stringify(response.profilePbj));
+
+    const { name, googleId, imageUrl } = response.profilePbj;
+
+    const doc = {
+      _id: googleId,
+      _type: "user",
+      userName: name,
+      image: imageUrl,
+    };
+  };
 
   return (
     <div className="flex justify-start items-center flex-col h-screen">
