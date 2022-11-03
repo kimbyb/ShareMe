@@ -13,12 +13,10 @@ const Login = () => {
   const responseGoogle = (response) => {
     console.log(response);
     localStorage.setItem("user", JSON.stringify(response.profileObj));
-    const { name, googleId, imageUrl } = response.profileObj;
+    const { clientId, credential } = response.profileObj;
     const doc = {
-      _id: googleId,
+      _id: clientId,
       _type: "user",
-      userName: name,
-      image: imageUrl,
     };
     client.createIfNotExists(doc).then(() => {
       navigate("/", { replace: true });
@@ -53,6 +51,7 @@ const Login = () => {
                   console.log("Login Failed");
                 }}
                 useOneTap
+                redirect_uri="http://localhost:3000/"
               />
             }
           </div>
